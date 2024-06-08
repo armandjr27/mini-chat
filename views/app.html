@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Chat</title>
+    <link rel="shortcut icon" href="http://localhost/mini-chat/public/imgs/app/favicon.png" type="image/png">
+    <link rel="stylesheet" href="http://localhost/mini-chat/public/assets/css/all.min.css">
+    <link rel="stylesheet" href="http://localhost/mini-chat/public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/mini-chat/public/assets/css/styles.css">
+</head>
+<body class="bg-light" class="container-fluid">
+    <header id="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark py-2">
+            <div class="container">
+                <h1 class="text-light" id="logo"><i class="fab fa-rocketchat fa-sm fa-fw"></i> Mini Chat</h1>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <button class="nav-link btn btn-outline-info btn-radius mr-2 px-4 shadow" data-toggle="modal" data-target="#new-message-modal" id="btn-new-message">Nouveau message</button>
+                    </li>
+                    <li class="nav-item active">
+                        <button class="nav-link btn btn-outline-info btn-radius ml-2 px-4 shadow" data-toggle="modal" data-target="#deconnexion-modal">Déconnexion</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row">
+            <aside id="sidebar" class="col-md-5 col-lg-4 pt-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control btn-radius" id="search" name="search" placeholder="Search ...">
+                </div>
+                <h3 class="text-center text-white pb-1 pt-0">Liste des conversations</h3>
+                <div >
+                    <table class="table text-white">
+                        <thead></thead>
+                        <tbody id="sidebar-content"></tbody>
+                    </table>
+                </div>
+            </aside>
+            <section id="main-section" class="col-md-7 col-lg-8 pt-2 px-5 pb-2">
+                <div id="main-message" class="text-white pb-3 px-4"></div>
+            </section>
+        </div>
+
+        <section id="connexion-section">
+            <h1 class="text-center pt-4 mb-4 text-light"><i class="fab fa-rocketchat fa-sm fa-fw"></i> Mini Chat</h1>
+    
+            <div class="card col-md-4 mx-auto text-white">
+                <div class="card-body">
+                    <form method="POST" id="form-connexion">
+                        <div class="form-group">
+                            <label for="signin-email"><i class="fas fa-envelope fa-sm fa-fw"></i> E-mail </label>
+                            <input type="email" class="form-control" name="signin-email" id="signin-email" placeholder="Entrer e-mail">
+                            <span class="text-danger" id="error_mail"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="signin-password"><i class="fas fa-key fa-sm fa-fw"></i> Mot de passe </label>
+                            <input type="password" class="form-control" name="signin-password" id="signin-password" placeholder="Entrer mot de passe">
+                            <span class="text-danger" id="error_pass"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="show-password"> Afficher mot de passe
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info float-right" id="connexion" name="connexion">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+    
+            <p class="text-center text-light mx-auto my-4 border shadow rounded-circle bg-dark" style="width:28px;height:28px;">ou</p>
+    
+            <p class="text-center mb-5">Veuillez-vous <a href="#signup" data-toggle="modal" data-target="#signup-modal">inscrire</a>, si vous n'avez pas encore de compte?</p>
+        </section>
+
+        <section id="inscription-section">
+            <div class="modal fade" id="signup-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-dark text-light">
+                            <h2 class="mx-auto"> Inscription</h2>
+                        </div>
+            
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form method="POST" id="form-inscription">
+                                <p class="text-warning text-center"><i class="fas fa-info-circle fa-md fa-fw"></i> Veuillez remplir ce formulaire pour la création de compte.</p>
+                                <div class="form-group">
+                                    <label for="pseudo" class="font-weight-bold"><i class="fas fa-user-alt fa-sm fa-fw"></i> Pseudo</label>
+                                    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="votre pseudo">
+                                    <span class="text-danger" id="error-pseudo"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup-email" class="font-weight-bold"><i class="fas fa-envelope fa-sm fa-fw"></i> E-mail</label>
+                                    <input type="email" class="form-control" name="signup-email" id="signup-email" placeholder="user@mail.com">
+                                    <span class="text-danger" id="error-email"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup-password" class="font-weight-bold"><i class="fas fa-key fa-sm fa-fw"></i> Mot de passe</label>
+                                    <input type="password" class="form-control" name="signup-pass" id="signup-password" placeholder="votre mot de passe">
+                                    <span class="text-danger" id="error-password"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="repassword" class="font-weight-bold"><i class="fas fa-key fa-sm fa-fw"></i> Confirmer mot de passe</label>
+                                    <input type="password" class="form-control" name="repassword" id="repassword" placeholder="confirmer votre mot de passe">
+                                    <span class="text-danger" id="error-repassword"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="float-right my-3">
+                                        <button type="submit" class="btn btn-dark px-4" id="inscription" name="inscription">S'inscrire</button>
+                                        <button type="button" class="btn btn-outline-danger px-4 ml-3" data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Notification pour l’identification -->
+    <div class="alert alert-info alert-msg font-weight-bold" id="alert-user-logged"></div>
+
+    <!-- Notification pour l'inscription -->
+    <div class="alert alert-info alert-msg font-weight-bold" id="alert-user-added"></div>
+
+    <!-- Modal pour la création de conversation -->
+    <div class="modal fade" id="new-message-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="mx-auto"> Nouveau message</h4>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form method="POST" id="form-new-message">
+                        <div class="form-group">
+                            <label for="titre" class="font-weight-bold">Titre</label>
+                            <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre de la conversation">
+                            <span class="text-danger" id="error-titre"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="interlocuteur" class="font-weight-bold">Interlocuteur</label>
+                            <select class="custom-select" id="interlocuteur">
+                                <option value="" selected>Sélectionner un interlocuteur</option>
+                            </select>
+                            <br/><span class="text-danger" id="error-interlocuteur"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-message-content" class="font-weight-bold">Écrivez votre message</label>
+                            <textarea class="form-control" rows="5" id="new-message-content"></textarea>
+                        </div>                          
+                        <div class="form-group">
+                            <div class="float-right my-3">
+                                <button type="submit" class="btn btn-dark px-4" id="new-message" name="new-message">Créer</button>
+                                <button type="button" class="btn btn-outline-danger px-4 ml-3" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour la déconnexion -->
+    <div class="modal fade" id="deconnexion-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header bg-dark text-light">
+                    <h4 class="modal-title">Confirmation</h4>
+                    <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <p class="text-center py-3">Voulez-vous vraiment vous déconnecter de votre compte ?</p>
+                        <div class="row justify-content-end">
+                            <button type="button" class="btn btn-danger" id="btn-deconnexion">Confirmer</button>
+                            <button type="button" class="btn btn-outline-dark ml-4" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid mt-3">
+        <p class="text-center">&copy; Copyright 
+            <script> 
+                const copy = new Date;
+                document.write(copy.getFullYear());
+            </script>
+            Armand Jr.
+        </p>
+    </footer>
+
+    <script src="http://localhost/mini-chat/public/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="http://localhost/mini-chat/public/assets/js/bootstrap.bundle.js"></script>
+    <script src="http://localhost/mini-chat/public/assets/js/bootstrap.min.js"></script>
+    <script type="module" src="http://localhost/mini-chat/public/assets/js/app.js"></script>
+</body>
+</html>

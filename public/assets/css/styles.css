@@ -1,0 +1,69 @@
+body {
+    height: 100vh;
+    width: 100%;
+    background-image: url('http://localhost/mini-chat/public/imgs/app/workbench.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.card {
+    background-color: #010100c1;
+}
+
+.alert-msg {
+	width: 480px;
+	position: fixed;
+	right: 2%;
+	bottom: 5%;
+	z-index: 100;
+}
+
+#sidebar,
+#header nav,
+#main-section {
+    background-color: #01010075;
+}
+
+#sidebar,
+#main-section {
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+}
+
+#header,
+#sidebar,
+#main-section,
+#connexion-section,
+#inscription-section,
+footer,
+#alert-user-added,
+#alert-user-logged { 
+	display: none;
+}
+
+.btn-radius {
+    padding-inline: 1.5rem;
+    border-radius: 32.5px;
+}
+
+.radius {
+    padding-inline: 1.5rem;
+    border-radius: 10px;
+}
+
+.message {
+    max-width: 60%;
+    padding-block: 0.15rem;
+    border: none;
+}
+
+#logo,
+.media {
+    cursor: pointer;
+}
+
+#new-message-content {
+    resize: none;
+}
